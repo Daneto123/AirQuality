@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.tooltipTop {
+  width: 100%;
+  height: 500px; /* или колкото ти трябва */
+  position: relative;
+}
+
+.tooltip {
+  background-color: white;
+  border: 1px solid black;
+  padding: 4px;
+  position: absolute;
+  display: none;
+  z-index: 10;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  margin-top: 100px;
+  height: 100vh;
+}
+
+.centered-div {
+    width: 1000px;
+    height: 400;
+    margin: 0 auto; /* Horizontal centering only */
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "email": "ivan.petrov@iot-company.com",
+    "sensorName": "e661385283339531"
+  },
+  {
+    "email": "maria.ivanova@smart-tech.bg",
+    "sensorName": "e661385283339532"
+  },
+  {
+    "email": "georgi.dimitrov@sensor-network.org",
+    "sensorName": "e661385283339533"
+  },
+  {
+    "email": "elena.koleva@industrial-monitoring.com",
+    "sensorName": "e661385283339534"
+  },
+  {
+    "email": "dimitar.nikolov@agritech.bg",
+    "sensorName": "e661385283339535"
+  },
+  {
+    "email": "radostina.stefanova@env-sensors.com",
+    "sensorName": "e661385283339536"
+  },
+  {
+    "email": "hristo.todorov@energy-monitoring.eu",
+    "sensorName": "e661385283339537"
+  },
+  {
+    "email": "silvia.vasileva@smart-home.io",
+    "sensorName": "e661385283339538"
+  },
+  {
+    "email": "todor.angelov@industrial-iot.net",
+    "sensorName": "e661385283339539"
+  },
+  {
+    "email": "yana.popova@city-infrastructure.bg",
+    "sensorName": "e661385283339540"
+  },
+  {
+    "email": "vasil.kuzmanov@transport-logistics.com",
+    "sensorName": "e661385283339541"
+  },
+  {
+    "email": "kalina.mihaylova@healthcare-monitoring.org",
+    "sensorName": "e661385283339542"
+  },
+  {
+    "email": "nikola.andreev@water-management.bg",
+    "sensorName": "e661385283339543"
+  },
+  {
+    "email": "desislava.georgieva@building-automation.eu",
+    "sensorName": "e661385283339544"
+  },
+  {
+    "email": "plamen.stoyanov@manufacturing-iot.com",
+    "sensorName": "e661385283339545"
+  },
+  {
+    "email": "svetla.nikolova@retail-sensors.io",
+    "sensorName": "e661385283339546"
+  },
+  {
+    "email": "krasimir.iliev@precision-agriculture.bg",
+    "sensorName": "e661385283339547"
+  },
+  {
+    "email": "gergana.petrova@weather-stations.org",
+    "sensorName": "e661385283339548"
+  },
+  {
+    "email": "atanas.dimitrov@air-quality-monitoring.com",
+    "sensorName": "e661385283339549"
+  },
+  {
+    "email": "bistra.koleva@research-institute.eu",
+    "sensorName": "e661385283339550"
+  }
+]

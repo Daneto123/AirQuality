@@ -1,0 +1,4 @@
+build/                 # Изходни файлове
+dist/                  # Изходни файлове
+node_modules/          # Зависимости
+*.map                  # Source map файлове

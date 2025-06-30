@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.aqi {
+  margin-top: 150px;
+}
+
+.aqi table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .aqi th, .aqi td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .aqi th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .device-recommender {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .device-recommender label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .device-recommender select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .device-recommender p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .airFilterHome {
+    margin-bottom: 50px;
+  }
+  
+  .airFilterHome ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .airFilterHome ul li {
+    margin-bottom: 10px;
+  }

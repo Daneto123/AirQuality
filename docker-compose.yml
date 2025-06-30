@@ -1,0 +1,81 @@
+version: '3'
+
+services:
+  # frontend:
+    # build:
+      # context: ./frontend              
+    # ports:
+      # - "3000:3000"                       
+    # volumes:
+      # - ./frontend:/frontend
+      # - /frontend/node_modules   
+    # environment:
+      # - NODE_ENV=production
+
+  # flask-app:
+    # build:
+      # context: ./backend/processDataApi
+    # ports:
+      # # - "YOUR_SERVER_IP:5000:5000"
+      # # - "172.28.43.94:5000:5000"
+      # - "5000:5000"
+    # volumes:
+      # - ./backend/processDataApi:/processDataApi
+    # environment:
+      # FLASK_ENV: development
+    # depends_on:
+      # - influxdb
+    # healthcheck:
+      # test: ["CMD", "curl", "-f", "http://YOUR_SERVER_IP:5000"]
+      # interval: 30s
+      # timeout: 10s
+      # retries: 5
+    # networks:
+      # - my-network
+
+  # influxdbapi:
+    # build:
+      # context: ./backend/influxdbApi
+    # ports:
+      # # - "YOUR_SERVER_IP:3060:3060"
+      # #- "172.28.43.94:3060:3060"
+      # - "3060:3060"
+    # command: node --max-old-space-size=4096 index.js
+    # volumes:
+      # - ./backend/influxdbApi:/influxdbApi
+      # - /influxdbApi/node_modules
+    # environment:
+      # - NODE_ENV=production
+    # depends_on:
+      # - influxdb
+    # healthcheck:
+      # test: ["CMD", "curl", "-f", "http://YOUR_SERVER_IP:3060"]
+      # interval: 30s
+      # timeout: 10s
+      # retries: 5
+    # networks:
+      # - my-network
+
+  influxdb:
+    image: influxdb:2.0
+    restart: always
+    ports:
+      # - "YOUR_SERVER_IP:8086:8086"
+      - "192.168.1.137:8087:8086"
+      #- "8086:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=REDACTED_PASSWORD
+      - DOCKER_INFLUXDB_INIT_BUCKET=sensorBucket
+      - DOCKER_INFLUXDB_INIT_RETENTION=1w
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+      - ./backend/influxDB/influxdb.conf:/etc/influxdb/influxdb.conf
+
+volumes:
+  influxdb_data: {}
+
+networks:
+  my-network:
+    driver: bridge

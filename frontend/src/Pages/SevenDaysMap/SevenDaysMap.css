@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.white { 
+    background-color: white; color: black; 
+}
+
+.yellow { 
+    background-color: yellow; color: black; 
+}
+
+.orange { 
+    background-color: orange; color: black; 
+}
+
+.red { 
+    background-color: red; color: white; 
+}

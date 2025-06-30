@@ -1,0 +1,39 @@
+{
+  "name": "influxdbapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --max-old-space-size=256 --expose-gc index.js",
+    "dev": "node index.js"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@influxdata/influxdb-client": "^1.35.0",
+    "@influxdata/influxdb-client-apis": "^1.35.0",
+    "archiver": "^7.0.1",
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.1",
+    "express-session": "^1.18.1",
+    "fs": "^0.0.1-security",
+    "helmet": "^8.0.0",
+    "js": "^0.1.0",
+    "JSONStream": "^1.3.5",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^7.0.3",
+    "path": "^0.12.7",
+    "pdfkit": "^0.17.1",
+    "readdirp": "^4.1.1",
+    "stream-chain": "^3.4.0",
+    "stream-json": "^1.9.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "url": "^0.11.4"
+  }
+}

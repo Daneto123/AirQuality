@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "4b3c079a-c454-42c5-9205-0f2114a48ad9",
+		"name": "tensis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3893775"
+	},
+	"item": [
+		{
+			"name": "addNewValue",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"timestamp\": \"2024-05-13T10:00:00Z\",\r\n\"Dust\": 20,\r\n\"temperature\": 22,\r\n\"humidity\": 75,\r\n\"weather_code\": 1,\r\n\"latitude\": 42.706534,\r\n\"longitude\": 23.294771,\r\n\"NH3\": 5,\r\n\"Benzene\": 2,\r\n\"CO2\": 3,\r\n\"city\": \"Sofia\",\r\n\"sensorName\": \"123235b32\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3060/addNewValue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"addNewValue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-bucket",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"temperatureReq\": \"10\",\r\n    \"humidityReq\": \"10\",\r\n    \"username\": \"daneto\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3050/create-bucket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"create-bucket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addDataForModel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3060/addDataForModel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"addDataForModel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-dashboard",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"databaseName\": \"temperature-sensor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3060/metricsLastDay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"metricsLastDay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "metrics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3060/metrics?days=7d&bucketName=Sofia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"metrics"
+					],
+					"query": [
+						{
+							"key": "days",
+							"value": "7d"
+						},
+						{
+							"key": "bucketName",
+							"value": "Sofia"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "predictionMetrics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3060/predictionMetrics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"predictionMetrics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDataForModel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3060/getDataForModel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"getDataForModel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadSoftwareFlash",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3060/downloadSoftwareFlash",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"downloadSoftwareFlash"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadReport",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3060/downloadReport",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"downloadReport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sendAlert",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3060/sendAlert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"sendAlert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "metricsLastDay",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3060/metricsLastDay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3060",
+					"path": [
+						"metricsLastDay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrediction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/getPrediction",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"getPrediction"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
