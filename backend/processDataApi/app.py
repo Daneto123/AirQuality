@@ -72,7 +72,7 @@ async def train_models():
 
 async def fetch_data():
     async with httpx.AsyncClient() as client:
-        response = await client.get('http://localhost:3060/metricsLastDayFile')
+        response = await client.get(f"{os.environ.get('DATA_API_URL', 'http://localhost:3060')}/metricsLastDayFile")
         if response.status_code == 200:
             return response.json()
         else:

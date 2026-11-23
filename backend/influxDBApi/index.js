@@ -31,6 +31,8 @@ const PORT = process.env.PORT || 3060;
 const IP = process.env.IP || "localhost";
 // Base URL this API uses to call its own endpoints
 const SELF_URL = `http://127.0.0.1:${PORT}`;
+// Python forecasting service (processDataApi)
+const PREDICTION_API_URL = process.env.PREDICTION_API_URL || 'http://127.0.0.1:5000';
 
 const app = express();
 
@@ -141,11 +143,11 @@ function sleep(ms) {
 
 app.get('/addFileData', async (req, res) => {
   const filePath = path.join(__dirname, '../influxDB/Data/all_data.json');
-  const fileData = await fs.readFile(filePath, 'utf-8');
+  const fileData = await fs.promises.readFile(filePath, 'utf-8');
   const jsonData = JSON.parse(fileData);
 
   for (let index = 0; index < jsonData.length; index++) {
-    const response = await axios.post('http://localhost:3060/addNewValue', jsonData[index]);
+    const response = await axios.post(`${SELF_URL}/addNewValue`, jsonData[index]);
     await sleep(3000);
   }
   res.status(200);
@@ -363,7 +365,7 @@ app.get('/metricsLastDayFile', async (req, res) => {
     const filePath = path.join(__dirname, '../influxDB/Data/all_data.json');
     
     // Четем съдържанието на файла
-    const jsonData = await fs.readFile(filePath, 'utf8');
+    const jsonData = await fs.promises.readFile(filePath, 'utf8');
     
     // Парсираме съдържанието
     const data = JSON.parse(jsonData);
@@ -419,7 +421,7 @@ app.delete('/deletePoint', async (req, res) => {
  */
 app.get('/predictionMetrics', async (req, res) => {
   //try {
-    const response = await fetch('http://127.0.0.1:5000/getPrediction');
+    const response = await fetch(`${PREDICTION_API_URL}/getPrediction`);
     
     // Log the response to ensure it's successful
     //console.log('Raw Response:', response);

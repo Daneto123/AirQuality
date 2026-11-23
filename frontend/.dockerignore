@@ -1,4 +1,5 @@
-build/                 # Изходни файлове
-dist/                  # Изходни файлове
-node_modules/          # Зависимости
-*.map                  # Source map файлове
+node_modules/
+build/
+dist/
+*.map
+.env

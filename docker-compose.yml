@@ -1,81 +1,68 @@
-version: '3'
+# Runs the whole AirQuality stack: docker compose up --build
+# Copy .env.example to .env and fill in your values first.
 
 services:
-  # frontend:
-    # build:
-      # context: ./frontend              
-    # ports:
-      # - "3000:3000"                       
-    # volumes:
-      # - ./frontend:/frontend
-      # - /frontend/node_modules   
-    # environment:
-      # - NODE_ENV=production
-
-  # flask-app:
-    # build:
-      # context: ./backend/processDataApi
-    # ports:
-      # # - "YOUR_SERVER_IP:5000:5000"
-      # # - "172.28.43.94:5000:5000"
-      # - "5000:5000"
-    # volumes:
-      # - ./backend/processDataApi:/processDataApi
-    # environment:
-      # FLASK_ENV: development
-    # depends_on:
-      # - influxdb
-    # healthcheck:
-      # test: ["CMD", "curl", "-f", "http://YOUR_SERVER_IP:5000"]
-      # interval: 30s
-      # timeout: 10s
-      # retries: 5
-    # networks:
-      # - my-network
-
-  # influxdbapi:
-    # build:
-      # context: ./backend/influxdbApi
-    # ports:
-      # # - "YOUR_SERVER_IP:3060:3060"
-      # #- "172.28.43.94:3060:3060"
-      # - "3060:3060"
-    # command: node --max-old-space-size=4096 index.js
-    # volumes:
-      # - ./backend/influxdbApi:/influxdbApi
-      # - /influxdbApi/node_modules
-    # environment:
-      # - NODE_ENV=production
-    # depends_on:
-      # - influxdb
-    # healthcheck:
-      # test: ["CMD", "curl", "-f", "http://YOUR_SERVER_IP:3060"]
-      # interval: 30s
-      # timeout: 10s
-      # retries: 5
-    # networks:
-      # - my-network
-
   influxdb:
-    image: influxdb:2.0
-    restart: always
+    image: influxdb:2.7
+    restart: unless-stopped
     ports:
-      # - "YOUR_SERVER_IP:8086:8086"
-      - "192.168.1.137:8087:8086"
-      #- "8086:8086"
+      - "8086:8086"
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
-      - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
-      - DOCKER_INFLUXDB_INIT_BUCKET=sensorBucket
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME:-admin}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD:?Set INFLUXDB_PASSWORD in .env}
+      - DOCKER_INFLUXDB_INIT_ORG=${ORG:-VratsaSoft}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUX_BUCKET:-sensorBucket}
       - DOCKER_INFLUXDB_INIT_RETENTION=1w
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUX_TOKEN:?Set INFLUX_TOKEN in .env}
     volumes:
       - influxdb_data:/var/lib/influxdb2
-      - ./backend/influxDB/influxdb.conf:/etc/influxdb/influxdb.conf
+
+  influxdbapi:
+    build: ./backend/influxDBApi
+    restart: unless-stopped
+    ports:
+      - "3060:3060"
+    environment:
+      - PORT=3060
+      - ORG=${ORG:-VratsaSoft}
+      - INFLUX_URL=http://influxdb:8086
+      - INFLUX_TOKEN=${INFLUX_TOKEN}
+      - INFLUX_BUCKET=${INFLUX_BUCKET:-sensorBucket}
+      - PREDICTION_API_URL=http://processdataapi:5000
+      - OPENCAGE_API_KEY=${OPENCAGE_API_KEY}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT:-465}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - SESSION_SECRET=${SESSION_SECRET:?Set SESSION_SECRET in .env}
+    volumes:
+      - ./backend/influxDB/Data:/influxDB/Data:ro
+    depends_on:
+      - influxdb
+
+  processdataapi:
+    build: ./backend/processDataApi
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - DATA_API_URL=http://influxdbapi:3060
+    volumes:
+      - ./backend/influxDB/Data:/influxDB/Data:ro
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Address the browser uses to reach the API
+        REACT_APP_API_URL: ${PUBLIC_API_URL:-http://localhost:3060}
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - influxdbapi
 
 volumes:
   influxdb_data: {}
-
-networks:
-  my-network:
-    driver: bridge

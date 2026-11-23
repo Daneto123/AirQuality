@@ -1,2 +1,3 @@
-node_modules/          # Зависимости на Node.js
-.env                   # Файлове с конфигурация за средата
+node_modules/
+.env
+backups/*.csv
