@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css'
+import { API_URL } from '../../config';
 
 const Navbar = () => {
   return (
@@ -10,7 +11,7 @@ const Navbar = () => {
         <NavLink to="/sevenDaysMap">Интерактивна карта</NavLink>
         <NavLink to="/recommendation">Препоръки</NavLink>
         <NavLink to="/aboutUs">За нас</NavLink>
-        <a href="http://192.168.1.137:3060/downloadReport" download>📥 Свали PDF отчет</a>
+        <a href={`${API_URL}/downloadReport`} download>📥 Свали PDF отчет</a>
     </nav>
   );
 };

@@ -29,6 +29,8 @@ import JSONStream from 'JSONStream';
 const org = process.env.ORG || "VratsaSoft";
 const PORT = process.env.PORT || 3060;
 const IP = process.env.IP || "localhost";
+// Base URL this API uses to call its own endpoints
+const SELF_URL = `http://127.0.0.1:${PORT}`;
 
 const app = express();
 
@@ -39,9 +41,6 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
   }
 });
 
@@ -177,7 +176,7 @@ app.post('/addNewValue', async (req, res) => {
   const CO2 = req.body.airData.CO2;
   const Dust = req.body.airData.Dust;
   
-  const checkForBucket = await axios.post('http://192.168.1.137:3060/create-bucket', {city: city});
+  const checkForBucket = await axios.post(`${SELF_URL}/create-bucket`, {city: city});
   const checkSensorName = checkAvailableSensor(sensorName);
 
   const date = new Date(timestamp * 1000);
@@ -560,7 +559,7 @@ app.get('/downloadSoftwareFlash', (req, res) => {
  *        description: Server Error
  */
 app.get('/downloadReport', async (req, res) => {
-  const fetchData = await fetch('http://192.168.1.137:3060/metricsLastMonth');
+  const fetchData = await fetch(`${SELF_URL}/metricsLastMonth`);
   const jsonData = await fetchData.json();
   const reportData = groupAndAverage(jsonData);
 
@@ -643,7 +642,7 @@ app.get('/downloadReport', async (req, res) => {
  *        description: Server Error
  */
 app.get('/backupData', async (req, res) => {
-  const fetchData = await fetch('http://192.168.1.137:3060/metricsLastMonth');
+  const fetchData = await fetch(`${SELF_URL}/metricsLastMonth`);
   const jsonData = await fetchData.json();
 
   let csv = "timestamp,Benzene,CO2,NH3,Dust,temperature,humidity\n";
@@ -674,7 +673,7 @@ app.get('/backupData', async (req, res) => {
  *        description: Server Error
  */
 app.get('/sendAlert', async (req, res) => {
-  const fetchData = await fetch('http://192.168.1.137:3060/metricsAlert', {city: "Sofia"});
+  const fetchData = await fetch(`${SELF_URL}/metricsAlert`, {city: "Sofia"});
   const jsonData = await fetchData.json();
   const reportData = groupAndAverage(jsonData);
 

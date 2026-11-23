@@ -3,6 +3,7 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import { format } from 'date-fns';
 import { Line } from 'react-chartjs-2';
 import './Diagram.css';
+import { API_URL } from '../../config';
 
 ChartJS.register(...registerables);
 
@@ -15,7 +16,7 @@ const Diagram = ({ date }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:3060/predictionMetrics`);
+        const response = await fetch(`${API_URL}/predictionMetrics`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

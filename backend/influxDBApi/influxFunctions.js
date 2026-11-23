@@ -1,5 +1,5 @@
 import { InfluxDB, Point, HttpError } from '@influxdata/influxdb-client';
-import { OrgsAPI, BucketsAPI } from '@influxdata/influxdb-client-apis';
+import { OrgsAPI, BucketsAPI, DeleteAPI } from '@influxdata/influxdb-client-apis';
 
 const influxConfig = {
     //url: 'http://host.docker.internal:8086',
@@ -7,13 +7,15 @@ const influxConfig = {
     token: process.env.INFLUX_TOKEN,
 };
   
+const org = process.env.ORG || 'VratsaSoft';
+
 let points = [];
 let pointsModel = [];
 
 const influx = new InfluxDB(influxConfig);
 
-export async function deleteData() {
-    const deleteAPI = new DeleteAPI(influxDB)
+export async function deleteData(bucket = process.env.INFLUX_BUCKET || 'sensorBucket') {
+    const deleteAPI = new DeleteAPI(influx)
     const stop = new Date()
     const start = new Date(stop.getTime() - /* an hour */ 60 * 60 * 1000)
 

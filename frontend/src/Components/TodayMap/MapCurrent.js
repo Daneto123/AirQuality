@@ -10,6 +10,7 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 import './MapCurrent.css';
+import { API_URL } from '../../config';
 
 const MapsCurrent = () => {
   const mapRef = useRef();
@@ -21,7 +22,7 @@ const MapsCurrent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:3060/metricsLastDay`);
+        const response = await fetch(`${API_URL}/metricsLastDay`);
         if (!response.ok) throw new Error('Failed to fetch data');
         const jsonData = await response.json();
         setData(jsonData);

@@ -14,6 +14,7 @@ import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import CircleStyle from 'ol/style/Circle';
 import './MapPrediction.css';
+import { API_URL } from '../../config';
 
 const MapsPrediction = ({ date }) => {
   const mapRef = useRef();
@@ -24,7 +25,7 @@ const MapsPrediction = ({ date }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:3060/predictionMetrics`); // ако искаме да визуализираме предскзването
+        const response = await fetch(`${API_URL}/predictionMetrics`); // ако искаме да визуализираме предскзването
 
         if (!response.ok) {
           throw new Error('Failed to fetch data');
