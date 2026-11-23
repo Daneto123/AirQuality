@@ -5,3 +5,10 @@ backend/influxDB/Data/*.json
 **/.env
 backend/raspberryPiScript/wifi_config.py
 ~$*
+
+# Python
+__pycache__/
+*.pyc
+
+# Runtime output
+backend/influxDBApi/backups/*.csv

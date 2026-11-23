@@ -582,13 +582,14 @@ app.get('/downloadReport', async (req, res) => {
 
   doc.pipe(res);
 
-  doc.registerFont('Arial', path.join(__dirname, 'fonts', 'arial.ttf'));
-  doc.font('Arial');
+  doc.registerFont('Regular', path.join(__dirname, 'fonts', 'DejaVuSans.ttf'));
+  doc.registerFont('Bold', path.join(__dirname, 'fonts', 'DejaVuSans-Bold.ttf'));
+  doc.font('Bold');
 
   doc.fontSize(16).text(`Почасов отчет за качеството на въздуха ${YearMonth}`, { align: "center" });
   doc.moveDown();
 
-  doc.fontSize(10).font('Helvetica-Bold');
+  doc.fontSize(10).font('Bold');
   const headers = ['DateTime', 'Benzene', 'CO2', 'Dust', 'NH3', 'Humidity', 'Temp'];
   const colWidths = [130, 60, 50, 50, 50, 60, 50];
   const startX = 50;
@@ -600,7 +601,7 @@ app.get('/downloadReport', async (req, res) => {
   doc.moveDown();
 
   // Данни
-  doc.font('Helvetica');
+  doc.font('Regular');
   reportData.forEach(row => {
     y = doc.y;
     const from = dayjs(row.timestamp).format('YYYY-MM-DD HH:00');
