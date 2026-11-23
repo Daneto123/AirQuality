@@ -8,7 +8,7 @@ from joblib import dump, load
 from flask import jsonify
 import os
 import logging
-from .config import set_api_key, get_api_key, get_file_path, get_model_pm10_path, get_model_pm25_path, get_output_path
+from .config import get_api_key, get_model_pm10_path, get_model_pm25_path, get_output_path
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
