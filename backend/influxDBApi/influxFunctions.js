@@ -3,9 +3,8 @@ import { OrgsAPI, BucketsAPI } from '@influxdata/influxdb-client-apis';
 
 const influxConfig = {
     //url: 'http://host.docker.internal:8086',
-    //url: 'http://YOUR_SERVER_IP:8086',
-    url: 'http://192.168.1.137:8087',
-    token: 'REDACTED_TOKEN',
+    url: process.env.INFLUX_URL || 'http://localhost:8086',
+    token: process.env.INFLUX_TOKEN,
 };
   
 let points = [];

@@ -159,7 +159,6 @@ def daily_prediction(api_key, df, model_pm10, model_pm25, output_path):
 
 # Main function
 def lr_prediction(df):
-    set_api_key("REDACTED_API_KEY")
     api_key = get_api_key()  # Ensure this environment variable is set
     output_path = get_output_path()
     model_pm10_path = get_model_pm10_path()

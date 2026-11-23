@@ -1,1 +1,7 @@
 backend/influxDB/Data/*.json
+
+# Secrets — never commit
+.env
+**/.env
+backend/raspberryPiScript/wifi_config.py
+~$*

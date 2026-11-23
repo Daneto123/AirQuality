@@ -6,11 +6,10 @@ import urequests
 import ujson
 
 # ==== Wi-Fi настройки ====
-SSID = 'REDACTED'
-PASSWORD = 'REDACTED'
+# Copy wifi_config.example.py to wifi_config.py and fill in your values
+from wifi_config import SSID, PASSWORD, SERVER_IP
 
 # ==== Сървър настройки ====
-SERVER_IP = '192.168.1.137'
 SERVER_PORT = 3060
 URL = f'http://{SERVER_IP}:{SERVER_PORT}/addNewValue'
 

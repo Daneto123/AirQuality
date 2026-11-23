@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import requests
@@ -67,7 +68,7 @@ def nn_prediction():
     # Fetch weather data
     lat = 42.708
     lon = 23.278
-    api_key = "REDACTED_API_KEY"
+    api_key = os.environ["OPENWEATHER_API_KEY"]
     weather_df = fetch_weather_data(lat, lon, api_key)
 
     # Predict future PM levels

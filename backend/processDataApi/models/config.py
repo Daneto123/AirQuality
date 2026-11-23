@@ -1,8 +1,9 @@
+import os
 from pathlib import Path
 
 script_dir = Path(__file__).resolve().parent
 
-api_key = "REDACTED_API_KEY"  # Ensure this environment variable is set
+api_key = os.environ.get("OPENWEATHER_API_KEY")
 output_path = script_dir / "../results/daily_predictions.json"
 model_pm10_path = script_dir / "../results/model_pm10.joblib"
 model_pm25_path = script_dir / "../results/model_pm25.joblib"
@@ -13,7 +14,6 @@ def set_api_key(new_key):
     """
     global api_key
     api_key = new_key
-    print(f"API Key set to: {api_key}")
 
 def get_api_key():
     """

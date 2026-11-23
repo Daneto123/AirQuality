@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 export async function getCoordinates(cityName) {
-  const geocodeUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(cityName)}&key=REDACTED_API_KEY`;
+  const geocodeUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(cityName)}&key=${process.env.OPENCAGE_API_KEY}`;
 
   try {
     const response = await fetch(geocodeUrl);

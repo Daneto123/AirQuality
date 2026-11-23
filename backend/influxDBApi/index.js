@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
 import rateLimit from 'express-rate-limit';
@@ -27,17 +28,17 @@ import JSONStream from 'JSONStream';
 
 const org = process.env.ORG || "VratsaSoft";
 const PORT = process.env.PORT || 3060;
-const IP = "192.168.1.137"; //process.env.IP || "YOUR_SERVER_IP";
+const IP = process.env.IP || "localhost";
 
 const app = express();
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.abv.bg',
-  port: 465,
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT || 465),
   secure: true,
   auth: {
-    user: 'alerts@example.com',
-    pass: 'REDACTED'
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
   },
   tls: {
     rejectUnauthorized: false
@@ -83,7 +84,7 @@ app.use(bodyParser.urlencoded({
   extended: true 
 }));
 app.use(session({
-  secret: 'REDACTED_SECRET',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
